@@ -1,19 +1,12 @@
 <template>
   <div class="service-catalog">
-    <h1>Service Catalog</h1>
-    <input
-      v-model="searchQuery"
-      class="search-input"
-      placeholder="Search services"
-    >
-    <ul
-      class="catalog"
-    >
-      <li
-        v-for="service in services"
-        :key="service.id"
-        class="service"
-      >
+    <div class="text-32 font-bold">Service Hub</div>
+    <div class="text-16/24">Organize services, manage and track versioning and API service documentation. <a href="#">Learn more</a></div>
+
+    <service-catalog-list></service-catalog-list>
+    <!-- <input v-model="searchQuery" class="search-input" placeholder="Search services"> -->
+    <!-- <ul class="catalog">
+      <li v-for="service in services" :key="service.id" class="service">
         <div>
           <p>
             {{ service.name }}
@@ -21,28 +14,23 @@
           <p>{{ service.description }}</p>
         </div>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import useServices from '@/composables/useServices'
+import { defineComponent } from 'vue'
+
+// components
+import ServiceCatalogList from './ServiceCatalogList.vue'
 
 export default defineComponent({
   name: 'ServiceCatalog',
+  components: {
+    ServiceCatalogList,
+  },
   setup() {
-    // Import services from the composable
-    const { services, loading } = useServices()
-
-    // Set the search string to a Vue ref
-    const searchQuery = ref('')
-
-    return {
-      services,
-      loading,
-      searchQuery,
-    }
+    return {}
   },
 })
 </script>
