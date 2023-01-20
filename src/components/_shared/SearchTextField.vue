@@ -1,0 +1,35 @@
+<template>
+  <label class="relative text-gray-400 focus-within:text-gray-600 block">
+    <img
+      :src="searchIconSrc"
+      class="pointer-events-none w-5 h-5 absolute top-1/2 transform -translate-y-1/2 left-3"
+      alt="Search Icon"
+    />
+
+    <input
+      type="text"
+      name="search"
+      id="search"
+      placeholder="Search"
+      class="focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-slate-50 form-input border rounded border-[#E7E7EC] py-[10px] h-[44px] px-4 text-14/24 bg-white appearance-none w-full block pl-9 focus:outline-none"
+    />
+  </label>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+//assets
+import searchIconSrc from "@/assets/search.svg";
+
+export default defineComponent({
+  name: "SearchTextField",
+  setup() {
+    return {
+      searchIconSrc,
+    };
+  },
+});
+</script>
+
+<style lang="scss"></style>
