@@ -1,5 +1,5 @@
 <template>
-  <div class="block px-5 py-5 border border-indigo-500">
+  <div class="block px-5 py-5 bg-white rounded-sm">
     <div v-for="state in states" :key="state.id" class="flex relative">
       <img
         :src="state.icon"

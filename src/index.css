@@ -6,6 +6,6 @@
 
 
 html {
-  /* default text color */
-  @apply text-[#3C4557]
+  /* default text and background color */
+  @apply text-[#3C4557] bg-[#F8F8FA]
 }
