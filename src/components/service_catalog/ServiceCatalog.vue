@@ -1,5 +1,5 @@
 <template>
-  <div class="service-catalog my-[53px] mx-auto">
+  <div class="my-[53px]">
     <div class="md:flex justify-between">
       <div class="text-32 font-bold">Service Hub</div>
       <div class="grid grid-cols-2 gap-6">
@@ -9,6 +9,7 @@
         ></search-text-field>
 
         <button
+          @click="handleOpenCloseCreateModal(true)"
           class="relative text-16 bg-[#07A88D] hover:bg-[#07A88D]/90 focus:outline-none focus:ring-1 focus:ring-[#07A88D]/90 focus:ring-offset-1 focus:ring-offset-slate-50 text-white font-semibold py-[12px] pr-[24px] pl-[44px] rounded-full w-full items-center justify-center sm:w-auto"
         >
           <img
@@ -50,6 +51,7 @@
     <service-catalog-list
       v-else
       :services="services"
+      @open-details="handleOpenDetailsModal"
       class="mt-6"
     ></service-catalog-list>
 
@@ -59,18 +61,19 @@
       @goBack="handleGoBack"
       @goForward="handleGoForward"
     ></pagination>
-    <!-- <input v-model="searchQuery" class="search-input" placeholder="Search services"> -->
-    <!-- <ul class="catalog">
-      <li v-for="service in services" :key="service.id" class="service">
-        <div>
-          <p>
-            {{ service.name }}
-          </p>
-          <p>{{ service.description }}</p>
-        </div>
-      </li>
-    </ul> -->
   </div>
+
+  <!-- Create a new service modal -->
+  <modal v-if="showCreateModal" @close="handleOpenCloseCreateModal">
+    Create a new Service Package
+  </modal>
+
+  <!-- Service details modal -->
+  <modal v-if="showDetailsModal" @close="handleCloseDetailsModal">
+    <service-catalog-details-modal
+      :service="dataForDetailsModal"
+    ></service-catalog-details-modal>
+  </modal>
 </template>
 
 <script lang="ts" setup>
@@ -81,7 +84,9 @@ import { useRouter, useRoute } from "vue-router";
 import ServiceCatalogList from "./ServiceCatalogList.vue";
 import ServiceCatalogListLoading from "./ServiceCatalogListLoading.vue";
 import SearchTextField from "@/components/_shared/SearchTextField.vue";
+import ServiceCatalogDetailsModal from "./service_catalog_details_modal/ServiceCatalogDetailsModal.vue";
 import Pagination from "@/components/_shared/Pagination.vue";
+import Modal from "@/components/_shared/Modal.vue";
 
 // assets
 import plusIconSrc from "@/assets/plus.svg";
@@ -90,45 +95,13 @@ import searchIconSrc from "@/assets/search.svg";
 // composables
 import useServicesApi from "@/composables/useServicesApi";
 
-// export default defineComponent({
-//   name: "ServiceCatalog",
-//   components: {
-//     ServiceCatalogList,
-//     SearchTextField,
-//   },
-//   setup() {
-//     // Import services from the composable
-//     const { services, loading } = useServicesApi();
+// Types
+import Service from "@/types/Service";
 
-//     // Set the search string to a Vue ref
-//     const searchQuery = ref("");
-
-//     return {
-//       plusIconSrc,
-//       services,
-//       searchQuery,
-//     };
-//   },
-// });
-
+// Service catalog list
 const currentPage = ref(1);
 const itemsPerPage = ref(9);
 const searchQuery = ref("");
-
-const router = useRouter();
-const route = useRoute();
-
-watch(
-  () => route.params.page,
-  async (newId) => {
-    if (!newId) return;
-    const urlPage = parseInt(newId.toString());
-    if (currentPage.value !== urlPage) currentPage.value = urlPage;
-  },
-  {
-    immediate: true,
-  }
-);
 
 const { services, loading, loadServices, ...paginationValues } = useServicesApi(
   currentPage,
@@ -154,11 +127,40 @@ onBeforeMount(async (): Promise<void> => {
   // Fetch services from the API
   loadServices();
 });
+
+// Router
+const router = useRouter();
+const route = useRoute();
+
+watch(
+  () => route.params.page,
+  async (newId) => {
+    if (!newId) return;
+    const urlPage = parseInt(newId.toString());
+    if (currentPage.value !== urlPage) currentPage.value = urlPage;
+  },
+  {
+    immediate: true,
+  }
+);
+
+// Modals
+const showCreateModal = ref(false);
+const showDetailsModal = ref(false);
+const dataForDetailsModal = ref<Service>();
+
+const handleOpenCloseCreateModal = (open: boolean): void => {
+  showCreateModal.value = open;
+};
+
+const handleOpenDetailsModal = (data: Service): void => {
+  if (!data.versions.length) return;
+  dataForDetailsModal.value = data;
+  showDetailsModal.value = true;
+};
+const handleCloseDetailsModal = (): void => {
+  showDetailsModal.value = false;
+};
 </script>
 
-<style lang="scss">
-.service-catalog {
-  max-width: 1366px;
-  padding: 0 20px;
-}
-</style>
+<style lang="scss"></style>

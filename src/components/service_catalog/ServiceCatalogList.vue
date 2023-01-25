@@ -4,6 +4,8 @@
       v-for="service in services"
       :key="service.id"
       :service="service"
+      @click="handleOpenDetailsModal(service)"
+      class="cursor-pointer"
     ></service-catalog-list-item>
   </div>
 </template>
@@ -11,26 +13,27 @@
 <script lang="ts" setup>
 import { computed, defineProps, toRefs } from "vue";
 
-// types
+// Types
 import Service from "@/types/Service";
 
-// components
+// Components
 import ServiceCatalogListItem from "./ServiceCatalogListItem.vue";
 
-// composables
-// import { usePagination } from "@/composables/useClientSidePagination";
-
+// Props
 const props = defineProps<{
   services: Service[];
 }>();
 
 const { services } = toRefs(props);
 
-// const { paginatedArray, ...paginationSettings } = usePagination<any>({
-//   itemsPerPage: 9,
-//   arrayToPaginate: services.value,
-//   currentPage: 1,
-// });
+// Emits
+const emit = defineEmits<{
+  (e: "openDetails", data: Service): void;
+}>();
+
+const handleOpenDetailsModal = (service: Service): void => {
+  emit("openDetails", service);
+};
 </script>
 
 <style lang="scss" scoped></style>

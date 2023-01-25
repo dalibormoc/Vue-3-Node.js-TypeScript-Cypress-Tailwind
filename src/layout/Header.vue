@@ -119,7 +119,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent, ref } from "vue";
 
 // assets
@@ -128,20 +128,7 @@ import organizationIconSrc from "@/assets/organization.svg";
 import settingsIconSrc from "@/assets/settings.svg";
 import profileIconSrc from "@/assets/profile.svg";
 
-export default defineComponent({
-  name: "AppLayoutHeader",
-  setup() {
-    const mobileMenuOpen = ref(false);
-
-    return {
-      logoSrc,
-      organizationIconSrc,
-      settingsIconSrc,
-      profileIconSrc,
-      mobileMenuOpen,
-    };
-  },
-});
+const mobileMenuOpen = ref(false);
 </script>
 
 <style lang="scss">

@@ -13,7 +13,7 @@
     </div>
 
     <div class="text-20 font-semibold">{{ service.name }}</div>
-    <div class="mt-[11px] text-13/20 text-[#707888]">
+    <div class="mt-[11px] text-13/20 text-[#707888] truncate">
       {{ service.description }}
     </div>
 
@@ -49,11 +49,10 @@ import Service from "@/types/Service";
 const props = defineProps<{
   service: Service;
 }>();
-
 const { service } = toRefs(props);
 
+// Service versions
 const versionsLength = computed(() => service.value.versions.length);
-
 const versionsCountString = computed(
   () =>
     `${versionsLength.value} ${
@@ -61,6 +60,7 @@ const versionsCountString = computed(
     }`
 );
 
+// Status indicator
 const status = computed(() => {
   if (service.value.configured && service.value.published) return "published";
   if (service.value.configured) return "unpublished";
