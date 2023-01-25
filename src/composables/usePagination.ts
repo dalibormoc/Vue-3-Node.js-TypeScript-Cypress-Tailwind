@@ -66,20 +66,45 @@ export function usePagination<T>(config: PaginationConfig<T>) {
     return config.currentPage.value;
   });
 
+  // Creates one page of items
   const paginatedArray = computed(() =>
     config.arrayToPaginate.value.slice(
-      (config.currentPage.value - 1) * rowsPerPage.value,
-      config.currentPage.value * rowsPerPage.value
+      (currentPage.value - 1) * rowsPerPage.value,
+      currentPage.value * rowsPerPage.value
     )
   );
 
+  // For pagination component
   const canGoBack = computed(() => currentPage.value > 1);
-
   const canGoForward = computed(() => currentPage.value < numberOfPages.value);
+  const totalCount = computed(() => config.arrayToPaginate.value.length);
+
+  const from = computed(() => {
+    if (!paginatedArray.value.length) return 0;
+    return currentPage.value * rowsPerPage.value - rowsPerPage.value + 1;
+  });
+
+  const to = computed(() => {
+    const to = currentPage.value * rowsPerPage.value;
+    if (to > totalCount.value) return totalCount.value;
+    return to;
+  });
+  // const from = computed(() => {
+  //   const arrayLength: number = paginatedArray.value.length;
+
+  //   if (!arrayLength) return 0;
+
+  //   const itemsOnPage: number =
+  //     arrayLength < rowsPerPage.value ? arrayLength : rowsPerPage.value;
+
+  //   return to.value - itemsOnPage + 1;
+  // });
 
   return {
     paginatedArray,
-    numberOfPages,
+    totalCount,
+    from,
+    to,
     canGoBack,
     canGoForward,
   };

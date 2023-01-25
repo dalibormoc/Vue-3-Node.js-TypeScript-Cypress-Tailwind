@@ -56,10 +56,10 @@ export default function useServicesApi(
   // Fulltext search in services
   const filteredData = computed(() => {
     // Skip search if no search query or search query contains less than 3 characters
-    if (!searchQuery?.value || searchQuery?.value.length < 3)
+    if (!searchQuery?.value || searchQuery?.value.trim().length < 3)
       return services.value;
 
-    const queryArray = searchQuery.value.split(" ");
+    const queryArray = searchQuery.value.trim().split(" ");
     return services.value.filter((item: Service) => {
       return queryArray.every((word) => {
         // Search case insensitive
@@ -75,7 +75,7 @@ export default function useServicesApi(
   });
 
   // Divide data into pages
-  const { paginatedArray, numberOfPages, canGoBack, canGoForward } =
+  const { paginatedArray, totalCount, from, to, canGoBack, canGoForward } =
     usePagination<Service>({
       rowsPerPage,
       currentPage,
@@ -95,6 +95,12 @@ export default function useServicesApi(
       //
       console.log(err);
     } finally {
+      // Artificially delayed loading
+      function delay(ms: number) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+      await delay(1000);
+
       // Reset loading state
       loading.value = false;
     }
@@ -109,7 +115,9 @@ export default function useServicesApi(
     loadServices,
 
     // For pagination component
-    numberOfPages,
+    totalCount,
+    from,
+    to,
     canGoBack,
     canGoForward,
   };

@@ -1,5 +1,5 @@
 <template>
-  <label class="relative text-gray-400 focus-within:text-gray-600 block">
+  <label class="relative text-gray-500 focus-within:text-gray-600 block">
     <img
       :src="searchIconSrc"
       class="pointer-events-none w-5 h-5 absolute top-1/2 transform -translate-y-1/2 left-3"
@@ -7,6 +7,8 @@
     />
 
     <input
+      :value="modelValue"
+      @input="handleChange"
       type="text"
       name="search"
       id="search"
@@ -16,20 +18,20 @@
   </label>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
+<script lang="ts" setup>
 //assets
 import searchIconSrc from "@/assets/search.svg";
 
-export default defineComponent({
-  name: "SearchTextField",
-  setup() {
-    return {
-      searchIconSrc,
-    };
-  },
-});
+defineProps<{
+  modelValue: string;
+}>();
+
+const emit = defineEmits<{
+  (event: "update:modelValue", payload: string): void;
+}>();
+
+const handleChange = ($event: Event) =>
+  emit("update:modelValue", ($event.target as HTMLInputElement).value);
 </script>
 
 <style lang="scss"></style>
