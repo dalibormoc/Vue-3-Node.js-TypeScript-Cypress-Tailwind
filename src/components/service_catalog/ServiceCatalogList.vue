@@ -27,7 +27,7 @@ const props = defineProps<{
 const { services } = toRefs(props);
 
 // const { paginatedArray, ...paginationSettings } = usePagination<any>({
-//   rowsPerPage: 9,
+//   itemsPerPage: 9,
 //   arrayToPaginate: services.value,
 //   currentPage: 1,
 // });

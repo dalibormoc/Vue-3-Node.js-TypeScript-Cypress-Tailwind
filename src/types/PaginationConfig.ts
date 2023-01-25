@@ -1,7 +1,7 @@
 import { Ref } from "vue";
 
 interface PaginationConfig<T> {
-  rowsPerPage?: Ref<number>;
+  itemsPerPage?: Ref<number>;
   arrayToPaginate: Ref<T[]>;
   currentPage: Ref<number>;
 }

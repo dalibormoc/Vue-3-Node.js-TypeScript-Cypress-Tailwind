@@ -3,10 +3,10 @@
 // import PaginationConfig from "@/types/PaginationConfig";
 
 // export function usePagination<T>(config: PaginationConfig<T>) {
-//   const rowsPerPage: number = config.rowsPerPage || 10;
+//   const itemsPerPage: number = config.itemsPerPage || 10;
 
 //   const numberOfPages = computed(() =>
-//     Math.ceil((config.arrayToPaginate.length || 0) / rowsPerPage)
+//     Math.ceil((config.arrayToPaginate.length || 0) / itemsPerPage)
 //   );
 
 //   // prevents current page from going out of range
@@ -16,8 +16,8 @@
 
 //   const paginatedArray = computed(() =>
 //     config.arrayToPaginate.slice(
-//       (config.currentPage - 1) * rowsPerPage,
-//       config.currentPage * rowsPerPage
+//       (config.currentPage - 1) * itemsPerPage,
+//       config.currentPage * itemsPerPage
 //     )
 //   );
 
@@ -37,7 +37,7 @@
 // }
 
 // // const pagginated = usePagination({
-// //   rowsPerPage: 2,
+// //   itemsPerPage: 2,
 // //   arrayToPaginate: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 // //   currentPage: 6,
 // // });
@@ -51,10 +51,10 @@ import { computed, ref } from "vue";
 import PaginationConfig from "@/types/PaginationConfig";
 
 export function usePagination<T>(config: PaginationConfig<T>) {
-  const rowsPerPage = config.rowsPerPage || ref(10);
+  const itemsPerPage = config.itemsPerPage || ref(10);
 
   const numberOfPages = computed(() =>
-    Math.ceil((config.arrayToPaginate.value.length || 0) / rowsPerPage.value)
+    Math.ceil((config.arrayToPaginate.value.length || 0) / itemsPerPage.value)
   );
 
   // // Prevents current page from going out of range
@@ -69,8 +69,8 @@ export function usePagination<T>(config: PaginationConfig<T>) {
   // Creates one page of items
   const paginatedArray = computed(() =>
     config.arrayToPaginate.value.slice(
-      (currentPage.value - 1) * rowsPerPage.value,
-      currentPage.value * rowsPerPage.value
+      (currentPage.value - 1) * itemsPerPage.value,
+      currentPage.value * itemsPerPage.value
     )
   );
 
@@ -81,11 +81,11 @@ export function usePagination<T>(config: PaginationConfig<T>) {
 
   const from = computed(() => {
     if (!paginatedArray.value.length) return 0;
-    return currentPage.value * rowsPerPage.value - rowsPerPage.value + 1;
+    return currentPage.value * itemsPerPage.value - itemsPerPage.value + 1;
   });
 
   const to = computed(() => {
-    const to = currentPage.value * rowsPerPage.value;
+    const to = currentPage.value * itemsPerPage.value;
     if (to > totalCount.value) return totalCount.value;
     return to;
   });
@@ -95,7 +95,7 @@ export function usePagination<T>(config: PaginationConfig<T>) {
   //   if (!arrayLength) return 0;
 
   //   const itemsOnPage: number =
-  //     arrayLength < rowsPerPage.value ? arrayLength : rowsPerPage.value;
+  //     arrayLength < itemsPerPage.value ? arrayLength : itemsPerPage.value;
 
   //   return to.value - itemsOnPage + 1;
   // });

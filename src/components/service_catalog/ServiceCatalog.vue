@@ -27,7 +27,11 @@
     </div>
 
     <!-- Loading -->
-    <div v-if="loading" class="mt-6">loading</div>
+    <div v-if="loading" class="mt-6">
+      <service-catalog-list-loading
+        :items-per-page="itemsPerPage"
+      ></service-catalog-list-loading>
+    </div>
 
     <!-- No data -->
     <div
@@ -70,10 +74,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onBeforeMount, computed } from "vue";
+import { ref, onBeforeMount, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 
 // components
 import ServiceCatalogList from "./ServiceCatalogList.vue";
+import ServiceCatalogListLoading from "./ServiceCatalogListLoading.vue";
 import SearchTextField from "@/components/_shared/SearchTextField.vue";
 import Pagination from "@/components/_shared/Pagination.vue";
 
@@ -106,23 +112,42 @@ import useServicesApi from "@/composables/useServicesApi";
 // });
 
 const currentPage = ref(1);
-const rowsPerPage = ref(9);
+const itemsPerPage = ref(9);
 const searchQuery = ref("");
+
+const router = useRouter();
+const route = useRoute();
+
+watch(
+  () => route.params.page,
+  async (newId) => {
+    if (!newId) return;
+    const urlPage = parseInt(newId.toString());
+    if (currentPage.value !== urlPage) currentPage.value = urlPage;
+  },
+  {
+    immediate: true,
+  }
+);
 
 const { services, loading, loadServices, ...paginationValues } = useServicesApi(
   currentPage,
-  rowsPerPage,
+  itemsPerPage,
   searchQuery
 );
 
 const pagination = ref(paginationValues);
 
 const handleGoBack = () => {
-  currentPage.value -= 1;
+  router.push({
+    path: `/${currentPage.value - 1}`,
+  });
 };
 
 const handleGoForward = () => {
-  currentPage.value += 1;
+  router.push({
+    path: `/${currentPage.value + 1}`,
+  });
 };
 
 onBeforeMount(async (): Promise<void> => {

@@ -46,7 +46,7 @@ import Service from "@/types/Service";
 
 export default function useServicesApi(
   currentPage: Ref<number>,
-  rowsPerPage?: Ref<number>,
+  itemsPerPage?: Ref<number>,
   searchQuery?: Ref<string>
 ) {
   const services: Ref<Service[]> = ref([]);
@@ -77,7 +77,7 @@ export default function useServicesApi(
   // Divide data into pages
   const { paginatedArray, totalCount, from, to, canGoBack, canGoForward } =
     usePagination<Service>({
-      rowsPerPage,
+      itemsPerPage,
       currentPage,
       arrayToPaginate: filteredData as Ref<Service[]>,
     });
