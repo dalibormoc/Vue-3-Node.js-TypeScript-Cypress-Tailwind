@@ -1,3 +1,31 @@
+# Implementation
+
+I tried to make the design as similar as possible to the mockup using only TailwindCSS and CSS. However, in real application I would prefer to use a component library that would make the development much faster and would keep the design consistent throughout the application.
+
+Things I have done:
+
+- Design according to the mockup
+- Modal window when click on a service
+- Loading animation
+- Search in services
+- Pagination
+- Responsive layout for mobile devices
+- Page number in the URL (very simple solution)
+- Included simple tests for some components
+- Included a test for composables
+
+Things that can be improved/added:
+
+- Add “X” (clear) button for clearing the search textbook
+- Tooltip that shows the full description, now truncated
+- Sort versions in the modal by datetime, now unsorted
+- Modal directive "click outside" and "esc" that would close the modal
+- Pagination: Next and back exported as functions from usePagination.ts and called outside the composable func, now passed through props as page number
+
+Not done:
+
+- State management with Pinia isn't done yet because of timing issues
+
 # Welcome
 
 Please take the time to read through all of the sections below; we want you to do great! :rocket:
