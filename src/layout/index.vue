@@ -10,16 +10,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import Header from "./Header.vue";
 import Footer from "./Footer.vue";
-export default {
-  name: "AppLayout",
-  components: {
-    Header,
-    Footer,
-  },
-};
 </script>
 
 <style lang="scss"></style>

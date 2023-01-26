@@ -26,10 +26,10 @@ import { toRefs, computed } from "vue";
 // Types
 import Service from "@/types/Service";
 
+// Props
 const props = defineProps<{
   service: Service;
 }>();
-
 const { service } = toRefs(props);
 
 const versionsAvatars = computed(() =>

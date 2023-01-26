@@ -38,6 +38,7 @@ import publishedIconSrc from "@/assets/state_icons/published.svg";
 import unpublishedIconSrc from "@/assets/state_icons/unpublished.svg";
 import inProgressIconSrc from "@/assets/state_icons/in_progress.svg";
 
+// Props
 defineProps<{
   status: string;
 }>();

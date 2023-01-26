@@ -60,6 +60,7 @@ import Service from "@/types/Service";
 // Utils
 import numberShortener from "@/utils/numberShortener";
 
+// Props
 const props = defineProps<{
   service: Service;
 }>();

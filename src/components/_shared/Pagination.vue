@@ -44,10 +44,12 @@ export interface Pagination {
   canGoForward?: boolean;
 }
 
+// Props
 const { pagination } = defineProps<{
   pagination: Pagination;
 }>();
 
+//Emits
 const emit = defineEmits<{
   (e: "goBack"): void;
   (e: "goForward"): void;

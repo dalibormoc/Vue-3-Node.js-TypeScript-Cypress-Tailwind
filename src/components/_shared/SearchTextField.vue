@@ -19,13 +19,15 @@
 </template>
 
 <script lang="ts" setup>
-//assets
+// Assets
 import searchIconSrc from "@/assets/search.svg";
 
+// Props
 defineProps<{
   modelValue: string;
 }>();
 
+// Emits
 const emit = defineEmits<{
   (event: "update:modelValue", payload: string): void;
 }>();

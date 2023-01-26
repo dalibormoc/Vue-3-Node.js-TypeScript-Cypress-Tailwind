@@ -32,24 +32,30 @@
       </button>
     </div>
     <div class="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end lg:gap-x-9">
-      <a href="#" class="font-semibold text-white hover:text-gray-400 flex">
+      <div
+        @click="openAlert('Organization')"
+        class="cursor-pointer font-semibold text-white hover:text-gray-400 flex"
+      >
         <img :src="organizationIconSrc" class="h-5 w-5 self-center" />
         <div class="ml-3 md:text-15 self-center">Organization</div>
-      </a>
-      <a href="#" class="font-semibold text-white hover:text-gray-400 flex">
+      </div>
+      <div
+        @click="openAlert('Settings')"
+        class="cursor-pointer font-semibold text-white hover:text-gray-400 flex"
+      >
         <img :src="settingsIconSrc" class="h-5 w-5 self-center" />
         <div class="ml-3 md:text-15 self-center">Settings</div>
-      </a>
+      </div>
 
-      <a
-        href="#"
-        class="font-medium text-white hover:text-gray-400 flex px-5 profile"
+      <div
+        @click="openAlert('Profile')"
+        class="header__profile cursor-pointer font-medium text-white hover:text-gray-400 flex px-5"
       >
         <img :src="profileIconSrc" class="h-30 w-30 self-center" />
         <div class="ml-3 md:text-15 self-center opacity-80">
           Katherine Ellis
         </div>
-      </a>
+      </div>
     </div>
   </nav>
 
@@ -95,23 +101,26 @@
       <div class="mt-6 flow-root">
         <div class="-my-6 divide-y divide-white-500/10">
           <div class="space-y-2 py-6">
-            <a
-              href="#"
-              class="-mx-3 block rounded-lg py-2 px-3 text-base leading-7 font-semibold text-white hover:bg-gray-400/10"
-              >Organization</a
+            <div
+              @click="openAlert('Organization')"
+              class="cursor-pointer -mx-3 block rounded-lg py-2 px-3 text-base leading-7 font-semibold text-white hover:bg-gray-400/10"
             >
-            <a
-              href="#"
-              class="-mx-3 block rounded-lg py-2 px-3 text-base leading-7 font-semibold text-white hover:bg-gray-400/10"
-              >Settings</a
+              Organization
+            </div>
+            <div
+              @click="openAlert('Settings')"
+              class="cursor-pointer -mx-3 block rounded-lg py-2 px-3 text-base leading-7 font-semibold text-white hover:bg-gray-400/10"
             >
+              Settings
+            </div>
           </div>
           <div class="py-6">
-            <a
-              href="#"
-              class="-mx-3 block rounded-lg py-2 px-3 text-base leading-7 font-semibold text-white hover:bg-gray-400/10"
-              >Katherine Ellis</a
+            <div
+              @click="openAlert('Profile')"
+              class="cursor-pointer -mx-3 block rounded-lg py-2 px-3 text-base leading-7 font-semibold text-white hover:bg-gray-400/10"
             >
+              Katherine Ellis
+            </div>
           </div>
         </div>
       </div>
@@ -122,16 +131,19 @@
 <script lang="ts" setup>
 import { defineComponent, ref } from "vue";
 
-// assets
+// Assets
 import logoSrc from "@/assets/logo.svg";
 import organizationIconSrc from "@/assets/organization.svg";
 import settingsIconSrc from "@/assets/settings.svg";
 import profileIconSrc from "@/assets/profile.svg";
 
 const mobileMenuOpen = ref(false);
+
+// Methods
+const openAlert = (msg: string): void => alert(msg);
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 :root {
   --header-bg-gradient: linear-gradient(180deg, #09224f 0%, #073382 100%);
   --header-bg-color: #072863;
@@ -141,14 +153,14 @@ const mobileMenuOpen = ref(false);
   background: var(--header-bg-gradient);
   background-color: var(--header-bg-color);
   height: 70px;
+
+  &__profile {
+    background-color: var(--header-bg-color);
+  }
 }
 
 .mobile-menu {
   background: var(--header-bg-gradient);
-  background-color: var(--header-bg-color);
-}
-
-.profile {
   background-color: var(--header-bg-color);
 }
 </style>

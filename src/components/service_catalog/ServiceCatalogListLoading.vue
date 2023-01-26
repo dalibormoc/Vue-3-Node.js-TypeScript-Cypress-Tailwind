@@ -29,6 +29,7 @@
 </template>
 
 <script lang="ts" setup>
+// Props
 const props = defineProps<{
   itemsPerPage: number;
 }>();

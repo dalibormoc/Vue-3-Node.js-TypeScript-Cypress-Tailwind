@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, toRefs } from "vue";
+import { toRefs } from "vue";
 
 // Types
 import Service from "@/types/Service";

@@ -5,7 +5,7 @@
 
   <div class="divide-y divide-[#F1F1F5] mt-6">
     <div
-      v-for="version in service.versions"
+      v-for="version in service?.versions"
       :key="version.id"
       class="flex flex-row flex-wrap py-2"
     >
@@ -14,12 +14,14 @@
       >
         v{{ version.name }}
       </div>
-      <div class="basis-[45%] text-12 text-[#8A8A8A] self-center pr-2">
+      <div
+        class="basis-[100%] sm:basis-[45%] text-12 text-[#8A8A8A] self-center pr-2 mb-4 sm:mb-0"
+      >
         {{ version.description }}
       </div>
       <div class="grow self-center pr-2">
         <service-catalog-details-modal-types
-          :type="service.type"
+          :type="service?.type"
         ></service-catalog-details-modal-types>
       </div>
 
@@ -55,12 +57,12 @@ import Service from "@/types/Service";
 
 // Props
 const props = defineProps<{
-  service: Service;
+  service?: Service;
 }>();
 const { service } = toRefs(props);
 
 // Service versions
-const versionsLength = computed(() => service.value.versions.length);
+const versionsLength = computed(() => service?.value?.versions.length);
 
 // Methods
 const shortName = (name: string): string => {

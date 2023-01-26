@@ -20,7 +20,7 @@ import { computed, ref } from "vue";
 
 // Props
 const prop = defineProps<{
-  type: string;
+  type?: string;
 }>();
 const { type } = ref(prop).value;
 

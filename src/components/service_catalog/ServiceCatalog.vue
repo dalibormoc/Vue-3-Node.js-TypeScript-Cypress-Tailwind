@@ -2,7 +2,7 @@
   <div class="my-[53px]">
     <div class="md:flex justify-between">
       <div class="text-32 font-bold">Service Hub</div>
-      <div class="grid grid-cols-2 gap-6">
+      <div class="grid grid-cols-2 gap-6 mt-4 md:mt-0">
         <search-text-field
           v-model="searchQuery"
           class="search-input sm:w-[209px]"
@@ -10,7 +10,7 @@
 
         <button
           @click="handleOpenCloseCreateModal(true)"
-          class="relative text-16 bg-[#07A88D] hover:bg-[#07A88D]/90 focus:outline-none focus:ring-1 focus:ring-[#07A88D]/90 focus:ring-offset-1 focus:ring-offset-slate-50 text-white font-semibold py-[12px] pr-[24px] pl-[44px] rounded-full w-full items-center justify-center sm:w-auto"
+          class="relative justify-self-end w-fit sm:w-full text-16 bg-[#07A88D] hover:bg-[#07A88D]/90 focus:outline-none focus:ring-1 focus:ring-[#07A88D]/90 focus:ring-offset-1 focus:ring-offset-slate-50 text-white font-semibold py-3 px-3 sm:pr-[24px] pl-[44px] rounded-full items-center justify-center"
         >
           <img
             :src="plusIconSrc"
@@ -65,7 +65,7 @@
 
   <!-- Create a new service modal -->
   <modal v-if="showCreateModal" @close="handleOpenCloseCreateModal">
-    Create a new Service Package
+    Not implemented
   </modal>
 
   <!-- Service details modal -->
@@ -109,6 +109,10 @@ const { services, loading, loadServices, ...paginationValues } = useServicesApi(
   searchQuery
 );
 
+// Router
+const router = useRouter();
+const route = useRoute();
+
 const pagination = ref(paginationValues);
 
 const handleGoBack = () => {
@@ -127,10 +131,6 @@ onBeforeMount(async (): Promise<void> => {
   // Fetch services from the API
   loadServices();
 });
-
-// Router
-const router = useRouter();
-const route = useRoute();
 
 watch(
   () => route.params.page,

@@ -21,9 +21,10 @@
 </template>
 
 <script lang="ts" setup>
-// assets
+// Assets
 import plusDarkIconSrc from "@/assets/plus_dark.svg";
 
+// Emits
 const emit = defineEmits<{
   (e: "close"): void;
 }>();
