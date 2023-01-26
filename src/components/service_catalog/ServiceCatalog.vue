@@ -5,7 +5,7 @@
       <div class="grid grid-cols-2 gap-6">
         <search-text-field
           v-model="searchQuery"
-          class="sm:w-[209px]"
+          class="search-input sm:w-[209px]"
         ></search-text-field>
 
         <button

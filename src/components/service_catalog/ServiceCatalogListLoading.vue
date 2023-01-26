@@ -1,9 +1,9 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+  <div class="loading grid grid-cols-1 md:grid-cols-3 gap-10">
     <div
       v-for="item in itemsPerPage"
       :key="item"
-      class="relative block px-7 py-5 bg-white rounded-sm min-h-[232px]"
+      class="loading-item relative block px-7 py-5 bg-white rounded-sm min-h-[232px]"
     >
       <div class="">
         <div class="h-2 bg-gray-200 rounded-full max-w-[120px] mb-5"></div>

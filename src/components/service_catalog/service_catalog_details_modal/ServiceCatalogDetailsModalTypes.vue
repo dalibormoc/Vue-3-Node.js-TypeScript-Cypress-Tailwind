@@ -1,13 +1,13 @@
 <template>
-  <div class="flex">
+  <div class="types flex">
     <div
-      class="bg-[#F8F8FA] text-[#1155CB] text-10 font-medium px-[6px] py-[2px] rounded w-fit mr-1"
+      class="type-http bg-[#F8F8FA] text-[#1155CB] text-10 font-medium px-[6px] py-[2px] rounded w-fit mr-1"
       :class="httpBgClass"
     >
       HTTP
     </div>
     <div
-      class="bg-[#F8F8FA] text-[#1155CB] text-10 font-medium px-[6px] py-[2px] rounded w-fit"
+      class="type-rest bg-[#F8F8FA] text-[#1155CB] text-10 font-medium px-[6px] py-[2px] rounded w-fit"
       :class="restBgClass"
     >
       REST

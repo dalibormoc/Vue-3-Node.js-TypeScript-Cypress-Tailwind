@@ -1,8 +1,8 @@
 <template>
-  <div class="flex justify-center text-13/20 mt-6">
+  <div class="pagination flex justify-center text-13/20 mt-6">
     <div class="self-center">
       <button
-        class="relative rounded-full border border-1 border-blue-300 disabled:border-black disabled:opacity-10 px-5 py-5"
+        class="back-btn relative rounded-full border border-1 border-blue-300 disabled:border-black disabled:opacity-10 px-5 py-5"
         :disabled="!pagination.canGoBack"
         @click="handleGoBack"
       >
@@ -14,14 +14,14 @@
       </button>
     </div>
     <div class="flex self-center px-6 opacity-70">
-      <div class="font-semibold mr-1">
+      <div class="page-items font-semibold mr-1">
         {{ pagination.from }} to {{ pagination.to }}
       </div>
       of {{ pagination.totalCount }} services
     </div>
     <div class="self-center">
       <button
-        class="relative rounded-full border border-1 border-blue-300 disabled:border-black disabled:opacity-10 px-5 py-5"
+        class="next-btn relative rounded-full border border-1 border-blue-300 disabled:border-black disabled:opacity-10 px-5 py-5"
         :disabled="!pagination.canGoForward"
         @click="handleGoForward"
       >
@@ -36,8 +36,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from "vue";
-
 export interface Pagination {
   totalCount?: number;
   from?: number;
