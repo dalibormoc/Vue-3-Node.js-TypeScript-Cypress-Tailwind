@@ -1,6 +1,6 @@
 # Implementation
 
-I tried to make the design as similar as possible to the mockup using only TailwindCSS and CSS. However, in real application I would prefer to use a component library that would make the development much faster and would keep the design consistent throughout the application.
+I tried to make the design as similar as possible to the mockup using only TailwindCSS and CSS. However, in a real application, I would prefer to use a component library that would make the development much faster and keep the design consistent throughout the application.
 
 Things I have done:
 
