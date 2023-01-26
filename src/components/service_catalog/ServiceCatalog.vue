@@ -24,7 +24,7 @@
 
     <div class="text-16/24 mt-4">
       Organize services, manage and track versioning and API service
-      documentation. <a href="#">Learn more</a>
+      documentation. <a href="#" class="text-[#1456CB]">Learn more</a>
     </div>
 
     <!-- Loading -->
