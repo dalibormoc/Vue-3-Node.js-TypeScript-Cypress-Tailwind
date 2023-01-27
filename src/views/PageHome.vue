@@ -1,5 +1,5 @@
 <template>
-  <service-catalog />
+  <ServiceCatalog />
 </template>
 
 <script lang="ts" setup>

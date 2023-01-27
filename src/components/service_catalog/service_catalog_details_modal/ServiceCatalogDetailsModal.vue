@@ -20,9 +20,9 @@
         {{ version.description }}
       </div>
       <div class="grow self-center pr-2">
-        <service-catalog-details-modal-types
+        <ServiceCatalogDetailsModalTypes
           :type="service?.type"
-        ></service-catalog-details-modal-types>
+        ></ServiceCatalogDetailsModalTypes>
       </div>
 
       <div class="basis-[150px] self-center">

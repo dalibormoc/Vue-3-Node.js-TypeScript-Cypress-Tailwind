@@ -1,12 +1,12 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-    <service-catalog-list-item
+    <ServiceCatalogListItem
       v-for="service in services"
       :key="service.id"
       :service="service"
       @click="handleOpenDetailsModal(service)"
       class="cursor-pointer"
-    ></service-catalog-list-item>
+    ></ServiceCatalogListItem>
   </div>
 </template>
 

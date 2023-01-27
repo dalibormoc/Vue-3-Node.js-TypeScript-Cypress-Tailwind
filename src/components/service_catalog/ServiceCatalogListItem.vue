@@ -1,9 +1,9 @@
 <template>
   <div class="relative block px-7 py-5 bg-white rounded-sm min-h-[232px]">
     <div class="flex justify-between">
-      <service-catalog-list-item-status
+      <ServiceCatalogListItemStatus
         :status="status"
-      ></service-catalog-list-item-status>
+      ></ServiceCatalogListItemStatus>
       <div
         v-if="versionsLength"
         class="bg-[#F2F6FE] rounded-full text-[#5888DB] text-13 px-4 py-2"
@@ -20,15 +20,15 @@
     <div class="absolute bottom-5 w-full -mx-7">
       <div class="flex justify-between px-7">
         <div>
-          <service-catalog-list-item-metrics
+          <ServiceCatalogListItemMetrics
             :service="service"
-          ></service-catalog-list-item-metrics>
+          ></ServiceCatalogListItemMetrics>
         </div>
         <div class="justify-end">
-          <service-catalog-list-item-avatar
+          <ServiceCatalogListItemAvatar
             v-if="service.published"
             :service="service"
-          ></service-catalog-list-item-avatar>
+          ></ServiceCatalogListItemAvatar>
         </div>
       </div>
     </div>

@@ -3,10 +3,10 @@
     <div class="md:flex justify-between">
       <div class="text-32 font-bold">Service Hub</div>
       <div class="grid grid-cols-2 gap-6 mt-4 md:mt-0">
-        <search-text-field
+        <SearchTextField
           v-model="searchQuery"
           class="search-input sm:w-[209px]"
-        ></search-text-field>
+        ></SearchTextField>
 
         <button
           @click="handleOpenCloseCreateModal(true)"
@@ -29,9 +29,9 @@
 
     <!-- Loading -->
     <div v-if="loading" class="mt-6">
-      <service-catalog-list-loading
+      <ServiceCatalogListLoading
         :items-per-page="itemsPerPage"
-      ></service-catalog-list-loading>
+      ></ServiceCatalogListLoading>
     </div>
 
     <!-- No data -->
@@ -48,31 +48,31 @@
     </div>
 
     <!-- One or more services -->
-    <service-catalog-list
+    <ServiceCatalogList
       v-else
       :services="services"
       @open-details="handleOpenDetailsModal"
       class="mt-6"
-    ></service-catalog-list>
+    ></ServiceCatalogList>
 
-    <pagination
+    <Pagination
       v-if="services.length"
       :pagination="pagination"
       @goBack="handleGoBack"
       @goForward="handleGoForward"
-    ></pagination>
+    ></Pagination>
   </div>
 
   <!-- Create a new service modal -->
-  <modal v-if="showCreateModal" @close="handleOpenCloseCreateModal">
+  <Modal v-if="showCreateModal" @close="handleOpenCloseCreateModal">
     Not implemented
-  </modal>
+  </Modal>
 
   <!-- Service details modal -->
   <modal v-if="showDetailsModal" @close="handleCloseDetailsModal">
-    <service-catalog-details-modal
+    <ServiceCatalogDetailsModal
       :service="dataForDetailsModal"
-    ></service-catalog-details-modal>
+    ></ServiceCatalogDetailsModal>
   </modal>
 </template>
 
