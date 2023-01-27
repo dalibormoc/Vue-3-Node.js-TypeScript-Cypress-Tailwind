@@ -1,41 +1,4 @@
-// import { ref, onBeforeMount } from 'vue'
-// import axios from 'axios'
-
-// // This composable is a simplified example for the exercise.
-// // Feel free to leave as-is, modify, or remove this file (and any others) as desired.
-// // https://vuejs.org/guide/reusability/composables.html
-
-// export default function useServices(): any {
-//   const services = ref<any[]>([])
-//   const loading = ref<any>(false)
-
-//   const getServices = async (): Promise<any> => {
-//     // Initialize loading state
-//     loading.value = true
-
-//     // Fetch data from the API
-//     const result = await axios.get('/api/services')
-
-//     // Store data in Vue ref
-//     services.value = result.data
-
-//     // Reset loading state
-//     loading.value = false
-//   }
-
-//   onBeforeMount(async (): Promise<void> => {
-//     // Fetch services from the API
-//     await getServices()
-//   })
-
-//   // Return stateful data
-//   return {
-//     services,
-//     loading,
-//   }
-// }
-
-import { ref, Ref, computed } from "vue";
+import { ref, Ref, watch } from "vue";
 import axios from "axios";
 
 import { usePagination } from "./usePagination";
@@ -46,48 +9,65 @@ import Service from "@/types/Service";
 
 export default function useServicesApi(
   currentPage: Ref<number>,
-  itemsPerPage?: Ref<number>,
-  searchQuery?: Ref<string>
+  searchQuery: Ref<string>,
+  itemsPerPage?: Ref<number>
 ) {
   const services: Ref<Service[]> = ref([]);
 
   const loading = ref(false);
 
-  // Fulltext search in services
-  const filteredData = computed(() => {
-    // Skip search if no search query or search query contains less than 3 characters
-    if (!searchQuery?.value || searchQuery?.value.trim().length < 3)
-      return services.value;
+  // // Full-text search in services (client-side)
+  // const filteredData = computed(() => {
+  //   // Skip search if no search query or search query contains less than 3 characters
+  //   if (!searchQuery?.value || searchQuery?.value.trim().length < 3)
+  //     return services.value;
 
-    const queryArray = searchQuery.value.trim().split(" ");
-    return services.value.filter((item: Service) => {
-      return queryArray.every((word) => {
-        // Search case insensitive
-        const wordLower = word.toLowerCase();
-        return (
-          // Search query in name, description, and type
-          item.name.toLowerCase().includes(wordLower) ||
-          item.description.toLowerCase().includes(wordLower) ||
-          item.type.toLowerCase().includes(wordLower)
-        );
-      });
-    });
-  });
+  //   const queryArray = searchQuery.value.trim().split(" ");
+  //   return services.value.filter((item: Service) => {
+  //     return queryArray.every((word) => {
+  //       // Search case insensitive
+  //       const wordLower = word.toLowerCase();
+  //       return (
+  //         // Search query in name, description, and type
+  //         item.name.toLowerCase().includes(wordLower) ||
+  //         item.description.toLowerCase().includes(wordLower) ||
+  //         item.type.toLowerCase().includes(wordLower)
+  //       );
+  //     });
+  //   });
+  // });
 
   // Divide data into pages
   const { paginatedArray, totalCount, from, to, canGoBack, canGoForward } =
     usePagination<Service>({
       itemsPerPage,
       currentPage,
-      arrayToPaginate: filteredData as Ref<Service[]>,
+      arrayToPaginate: services,
     });
 
-  const loadServices = async () => {
+  watch(searchQuery, (newVal, oldVal): void => {
+    if (newVal !== oldVal) {
+      const query = searchQuery.value.trim();
+      // Load all services when no search query
+      if (!query) loadServices();
+
+      // Filter services when search query contains more than 2 characters
+      if (query.length > 2) {
+        loadServices(searchQuery.value);
+        currentPage.value = 1;
+      }
+    }
+  });
+
+  const loadServices = async (searchQuery: string = ""): Promise<void> => {
     // Initialize loading state
     loading.value = true;
     try {
+      let result;
+
       // Fetch data from the API
-      const result = await axios.get(URL);
+      if (!searchQuery) result = await axios.get(URL);
+      else result = await axios.get(`${URL}?q=${searchQuery}`);
 
       // Store data in Vue ref
       services.value = result.data;

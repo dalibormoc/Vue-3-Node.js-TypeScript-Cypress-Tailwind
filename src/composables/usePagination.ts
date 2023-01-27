@@ -41,16 +41,6 @@ export function usePagination<T>(config: PaginationConfig<T>) {
     if (to > totalCount.value) return totalCount.value;
     return to;
   });
-  // const from = computed(() => {
-  //   const arrayLength: number = paginatedArray.value.length;
-
-  //   if (!arrayLength) return 0;
-
-  //   const itemsOnPage: number =
-  //     arrayLength < itemsPerPage.value ? arrayLength : itemsPerPage.value;
-
-  //   return to.value - itemsOnPage + 1;
-  // });
 
   return {
     paginatedArray,

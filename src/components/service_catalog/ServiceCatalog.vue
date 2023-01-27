@@ -36,7 +36,7 @@
 
     <!-- No data -->
     <div
-      v-else-if="services.length < 1"
+      v-else-if="!services || services.length < 1"
       class="flex flex-col justify-center items-center bg-white rounded-sm mt-12 py-12 opacity-80 text-14/24"
     >
       <img
@@ -105,8 +105,8 @@ const searchQuery = ref("");
 
 const { services, loading, loadServices, ...paginationValues } = useServicesApi(
   currentPage,
-  itemsPerPage,
-  searchQuery
+  searchQuery,
+  itemsPerPage
 );
 
 // Router
