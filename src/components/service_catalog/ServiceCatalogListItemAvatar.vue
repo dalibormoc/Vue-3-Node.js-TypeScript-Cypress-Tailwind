@@ -1,6 +1,6 @@
 <template>
   <img
-    v-for="(avatar, index) in versionsAvatars.slice(0, 2)"
+    v-for="(avatar, index) in versionsAvatarsPreview"
     :key="avatar.id"
     :src="avatar.avatar"
     class="rounded-full w-9 h-9 absolute right-4 bottom-0"
@@ -36,6 +36,10 @@ const versionsAvatars = computed(() =>
   service.value.versions?.map((v) => {
     return { id: v.developer?.id, avatar: v.developer?.avatar };
   })
+);
+
+const versionsAvatarsPreview = computed(() =>
+  versionsAvatars.value.slice(0, 2)
 );
 </script>
 
