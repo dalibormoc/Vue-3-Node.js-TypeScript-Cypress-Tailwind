@@ -12,7 +12,7 @@
     </div>
 
     <!-- Uptime -->
-    <div v-if="service.metrics.latency" class="flex mb-1">
+    <div v-if="service.metrics.uptime" class="flex mb-1">
       <div
         class="rounded-full w-[6px] h-[6px] bg-[#42D782] self-center mr-2"
       ></div>
@@ -44,7 +44,7 @@
 
   <div v-else class="text-12">
     <!-- Not configured -->
-    <div v-if="service.metrics.latency" class="flex mb-1">
+    <div class="flex mb-1">
       <div
         class="rounded-full w-[6px] h-[6px] bg-[#B6B6BD] self-center mr-2"
       ></div>

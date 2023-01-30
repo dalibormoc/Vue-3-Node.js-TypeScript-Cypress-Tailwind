@@ -2,6 +2,7 @@
   <div class="relative block px-7 py-5 bg-white rounded-sm min-h-[232px]">
     <div class="flex justify-between">
       <ServiceCatalogListItemStatus
+        class="h-8"
         :status="status"
       ></ServiceCatalogListItemStatus>
       <div
