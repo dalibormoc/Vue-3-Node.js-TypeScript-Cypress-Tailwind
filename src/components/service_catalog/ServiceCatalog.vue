@@ -4,7 +4,7 @@
       <div class="text-32 font-bold">Service Hub</div>
       <div class="grid grid-cols-2 gap-6 mt-4 md:mt-0">
         <SearchTextField
-          v-model="searchQuery"
+          v-model.trim="searchQuery"
           class="search-input sm:w-[209px]"
         ></SearchTextField>
 
